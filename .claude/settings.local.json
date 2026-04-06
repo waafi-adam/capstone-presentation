@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(mkdir -p \"C:/Users/waafi/factorem/capstone-script\")",
+      "Read(//c/Users/waafi/factorem/**)",
+      "Bash(npm install:*)",
+      "Bash(node build.js)",
+      "Bash(npx playwright:*)",
+      "Bash(python3 compress.py)",
+      "Bash(npm run:*)",
+      "Bash(python3 -c ':*)",
+      "Bash(python3 check_dims.py)",
+      "Bash(python3 fix_transparency.py)",
+      "Bash(npx vercel:*)",
+      "Bash(rm -rf screenshots)",
+      "Bash(node screenshot.mjs)"
+    ]
+  }
+}

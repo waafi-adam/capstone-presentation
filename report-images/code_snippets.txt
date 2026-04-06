@@ -1,0 +1,199 @@
+Code Snippets Extracted from Capstone Report (report.html)
+============================================================
+
+The report contains 6 distinct code blocks, all found within table cells
+in the Google Docs HTML export. Inline code references (class "c12",
+Roboto Mono font) are also summarised at the end.
+
+
+================================================================================
+SNIPPET 1: Widget Routes (Section 8.1 - Widget routing and customisation)
+================================================================================
+Description: The three supported widget routes exposed by WidgetRouter.
+
+/widget/tde           -> TDE widget
+/widget/dfm           -> DFM widget
+/widget/conversion -> CAD conversion widget
+
+
+================================================================================
+SNIPPET 2: Iframe Embedding Example (Section 8.1 - Widget routing and customisation)
+================================================================================
+Description: How a public page embeds a widget via iframe with URL-based
+title customisation.
+
+<iframe
+  src="https://app.factorem.co/widget/tde?title=Technical_Drawing_Extraction"
+  width="100%"
+  height="700"
+></iframe>
+
+
+================================================================================
+SNIPPET 3: Statsig Event Constants (Section 8.7 - Analytics and tracking implementation)
+================================================================================
+Description: Centralised event constant file defining core widget events
+for naming consistency across all visitor-facing tools.
+
+CONVERSION_WIDGET_FILE_UPLOAD: 'conversion_widget_file_upload',
+DFM_WIDGET_FILE_UPLOAD: 'dfm_widget_file_upload',
+DFM_WIDGET_EXTRACT: 'dfm_widget_extract',
+TDE_WIDGET_FILE_UPLOAD: 'tde_widget_file_upload',
+TDE_WIDGET_EXTRACT: 'tde_widget_extract',
+
+
+================================================================================
+SNIPPET 4: Frontend Unit Test - tdeUtils (Section 9.4 - Unit testing and static analysis)
+================================================================================
+Description: Example frontend unit test for TDE utility functions that
+check whether extraction values are valid or "not found".
+
+import { hasFound, isNotFound } from '../tdeUtils';
+
+describe('tdeUtils', () => {
+
+  describe('isNotFound', () => {
+
+    it('should return true for "not found" variations', () => {
+
+      expect(isNotFound('not found')).toBe(true);
+
+      expect(isNotFound('NOT_FOUND')).toBe(true);
+
+      expect(isNotFound('notfound')).toBe(true);
+
+    });
+
+    it('should return false for valid values', () => {
+
+      expect(isNotFound('valid value')).toBe(false);
+
+      expect(isNotFound('0.1in')).toBe(false);
+
+    });
+
+  });
+
+});
+
+
+================================================================================
+SNIPPET 5: Backend Unit Test - isDFMValid (Section 9.4 - Unit testing and static analysis)
+================================================================================
+Description: Example backend unit test validating DFM business logic
+independently using mocked data. Note: the code block in the report's
+table cell ends after the mock data definition; the remaining assertions
+appear immediately after the table in the body text.
+
+describe('isDFMValid', () => {
+
+  it('should return true when both dfm_success and all_dfm_checks_passed are true', async () => {
+
+    const mockData = {
+
+      output: {
+
+        defects: {
+
+          dfm_success: true,
+
+          all_dfm_checks_passed: true,
+
+        },
+
+      },
+
+    };
+
+// (continued outside the code block in the report text:)
+dfmExtractionInfoRepo.getLatestDfmDefectsByItemID.mockResolvedValue(mockData);
+const result = await isDFMValid(itemID);
+expect(result).toBe(true);
+}); });
+
+
+================================================================================
+SNIPPET 6: ESLint Configuration (Section 9.4 - Unit testing and static analysis)
+================================================================================
+Description: Example of the frontend ESLint rules configuration, showing
+accessibility checks (iframe-has-title), unused variable handling, and
+other correctness/maintainability rules.
+
+rules: {
+
+  'jsx-a11y/iframe-has-title': 'warn',
+
+  'no-unused-vars': [
+
+    'error',
+
+    {
+
+      argsIgnorePattern: '^_',
+
+      varsIgnorePattern: '^_',
+
+    },
+
+  ],
+
+  'no-use-before-define': ['error', { functions: false, classes: false }],
+
+  'no-unsafe-optional-chaining': 'error',
+
+  'no-shadow': 'error',
+
+}
+
+
+================================================================================
+ADDITIONAL: Key Inline Code References (Roboto Mono / class "c12")
+================================================================================
+These are not standalone code blocks but important inline code-styled
+terms referenced throughout the report:
+
+Routing & Components:
+  - WidgetRouter (component that selects widget by route parameter)
+  - widgetType (route parameter)
+  - title (URL query parameter, e.g. ?title=Technical_Drawing_Extraction)
+
+Widget Types / Routes:
+  - conversion, dfm, tde
+
+Analytics Event Names:
+  - tde_widget_file_upload, tde_widget_extract
+  - dfm_widget_file_upload, dfm_widget_extract
+  - conversion_widget_file_upload
+  - parts_gallery_nav_clicked, parts_gallery_nav_item_clicked
+
+Analytics Architecture:
+  - withStatsigProvider (HOC for Statsig provider)
+  - useStatsigInitialization (hook for initialising Statsig client)
+  - useStatsigHook (reusable hook wrapping event-producing handlers)
+
+Conversion Types:
+  - files_to_stl, sldprt_to_step
+
+Data Files:
+  - gallery-data.json (public gallery metadata published to S3)
+
+Auth Middleware:
+  - authenticate, isAdmin (server-side middleware for gallery management)
+
+Test Files:
+  - tde-widget.cy.js, dfm-widget.cy.js, conversion-widget.cy.js (Cypress E2E)
+  - tdeActionUtils.test.js, tdeUtils.test.js, objectUtils.test.js (frontend unit)
+  - loginApi.test.js, dfmUtils.test.js, s3Utils.test.js (backend unit)
+
+Linting Rules:
+  - jsx-a11y, no-unused-vars, eqeqeq, no-shadow, no-unsafe-optional-chaining
+  - jsx-a11y/iframe-has-title
+
+Deployment URLs:
+  - https://nexus.factorem.co/demo/technical-drawing
+  - https://nexus.factorem.co/demo/3d-design-file
+  - https://www.factorem.co/knowledge-hub/bringing-factorems-internal-tools-to-the-world
+  - https://www.factorem.co/parts-gallery
+  - https://factorems-sublime-site.webflow.io/ (Webflow staging)
+  - balloon.factorem.co (auto-ballooning tool)
+  - app.factorem.co/getquotenow

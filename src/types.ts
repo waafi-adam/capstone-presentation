@@ -10,4 +10,7 @@ export interface SlideData {
   layout?: 'title' | 'default' | 'section-break' | 'quote' | 'two-col'
   leftCol?: string[]
   rightCol?: string[]
+  image?: string
+  images?: string[]
+  code?: { language: string; snippet: string }
 }

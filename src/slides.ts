@@ -64,22 +64,24 @@ const slides: SlideData[] = [
   {
     id: 5,
     section: 'iwsp',
-    title: 'Key Contributions (1/2)',
+    title: 'Key Contributions (1/3)',
     bullets: [
       {
         text: 'High-Intent User Detection',
         sub: [
-          'Identified users who uploaded parts but abandoned mid-process',
-          'Auto-alerts sales team via Slack',
-          'Improved follow-up on warm leads, boosted conversion',
+          'Tracks users who uploaded parts but abandoned checkout',
+          'Flags company-email users who leave without converting',
+          'Shows what specific parts each lead left behind',
+          'Auto-alerts sales via region-specific Slack channels + HubSpot',
         ],
       },
       {
         text: 'RAG-based AI Email Agent (n8n)',
         sub: [
-          'Retrieves order data and learns from feedback',
-          'Enables 24/7 customer support',
-          'Reduced manual effort for the team',
+          'Handles US customer emails outside SG working hours',
+          'Queries platform DB for order context — items, projects, suppliers, pricing',
+          'Self-learning: feedback saved as global rules (Google Docs) or local rules (vector DB)',
+          'Automates ops workflows — e.g. NCR lookup of supplier, price, delivery, IDs',
         ],
       },
     ],
@@ -87,20 +89,28 @@ const slides: SlideData[] = [
   {
     id: 6,
     section: 'iwsp',
-    title: 'Key Contributions (2/2)',
+    title: 'Key Contributions (2/3)',
     bullets: [
       {
         text: 'FabCredits — Prepaid Checkout Credit System',
         sub: [
-          'Enables upfront revenue collection',
-          'Smoother payment experience for returning customers',
+          'Enables upfront revenue collection for loyal customers',
+          'Integrated with Xero for accounting reconciliation',
         ],
       },
       {
-        text: 'Statsig Analytics Tool',
+        text: 'Statsig — Platform-Wide Analytics',
         sub: [
-          'Reusable analytics integration across features',
-          'Helped the team track usage and optimize product decisions',
+          'Solved the problem of not being able to track feature success',
+          'A/B testing, session recording, user segmentation',
+          'Adopted by colleagues to track their own features\' success metrics',
+        ],
+      },
+      {
+        text: 'Contact Form Spam Filter',
+        sub: [
+          'AI agent screens marketing site contact form submissions',
+          'Only genuine inquiries forwarded to sales on Slack',
         ],
       },
     ],
@@ -108,13 +118,24 @@ const slides: SlideData[] = [
   {
     id: 7,
     section: 'iwsp',
-    title: 'Other Notable Work',
+    title: 'Key Contributions (3/3)',
     bullets: [
-      'Part upload improvements on Manage Projects page',
-      'UX enhancements for the part upload experience',
-      'HTS code integration in part upload flow',
-      'TDE tolerance display — showing extracted tolerances to customers',
-      'Alpha item/project labeling — flagging new customer items for admin awareness',
+      {
+        text: 'Customer Experience & UX',
+        sub: [
+          'Onboarding flow overhaul — reduced post-upload drop-offs',
+          'CAD-missing prompt — increased CAD uploads, fewer manual quotes',
+          'Guest localization — geo-based pricing, currency, shipping',
+        ],
+      },
+      {
+        text: 'Internal Tooling & Ops',
+        sub: [
+          'Complex item marker · Image-to-PDF converter · QC/DO customer visibility',
+          'Supplier job removal reason tracking',
+          'HTS code capture (Phase 1) for US tariff compliance',
+        ],
+      },
     ],
   },
   {
@@ -122,12 +143,13 @@ const slides: SlideData[] = [
     section: 'iwsp',
     title: 'IWSP Summary',
     bullets: [
-      'Worked across full stack: React · Node.js/Express · SQL · AWS S3',
+      'Worked across full stack: React · Node.js/Express · SQL · AWS S3 · n8n · Statsig',
       'Delivered production features under real business pressure',
-      'Gained experience in agile workflows, stakeholder communication, and rapid iteration',
+      'Took on tasks from blocked full-timers · Supervised and onboarded new interns',
+      'Offered full-time R&D position post-internship — focusing on AI/ML',
     ],
     highlight:
-      'One feature I built — the Statsig analytics tool — became a core part of my capstone project...',
+      'The AI Email Agent demonstrated I could independently learn and apply AI concepts (RAG, vector DBs) in production — leading to the R&D offer.',
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -166,6 +188,13 @@ const slides: SlideData[] = [
       },
     ],
     note: 'Gap between what Factorem can do internally vs. what visitors experience externally',
+  },
+  // ── Dedicated diagram slide ──
+  {
+    id: 101,
+    section: 'capstone',
+    title: 'Problem Context — Before the Capstone',
+    image: '/images/problem-context.png',
   },
   {
     id: 11,
@@ -258,6 +287,7 @@ const slides: SlideData[] = [
     highlight:
       'Decision: iframe for widgets (isolation) · page-native for gallery (dynamic height)',
   },
+  // ── Solution Architecture: bullets then full diagram ──
   {
     id: 15,
     section: 'capstone',
@@ -270,6 +300,13 @@ const slides: SlideData[] = [
     ],
     note: 'Key insight: expose existing capabilities without rebuilding them — reuse the platform',
   },
+  {
+    id: 151,
+    section: 'capstone',
+    title: 'High-Level Solution Architecture',
+    image: '/images/solution-architecture.png',
+  },
+  // ── Widget Architecture: bullets then full diagram ──
   {
     id: 16,
     section: 'capstone',
@@ -291,7 +328,26 @@ const slides: SlideData[] = [
         ],
       },
     ],
+    code: {
+      language: 'html',
+      snippet: `<!-- Embedding a widget on any CMS page -->
+<iframe
+  src="https://app.factorem.co/widget/tde?title=Try+TDE"
+  width="100%"
+  height="700"
+  frameborder="0"
+  allow="clipboard-write"
+></iframe>`,
+    },
   },
+  {
+    id: 161,
+    section: 'capstone',
+    title: 'Widget Architecture — Diagram',
+    subtitle: 'Routing, Embedding & Backend Interaction',
+    image: '/images/widget-architecture.png',
+  },
+  // ── Gallery Architecture: bullets then full diagram ──
   {
     id: 17,
     section: 'capstone',
@@ -315,6 +371,14 @@ const slides: SlideData[] = [
     ],
   },
   {
+    id: 171,
+    section: 'capstone',
+    title: 'Parts Gallery Architecture — Diagram',
+    subtitle: 'FE, BE, Publication Pipeline & Webflow Integration',
+    image: '/images/gallery-architecture.png',
+  },
+  // ── Statsig Architecture: bullets then full diagram ──
+  {
     id: 18,
     section: 'capstone',
     title: 'Statsig Analytics Architecture',
@@ -334,15 +398,31 @@ const slides: SlideData[] = [
           'QA account exclusion to keep data clean',
         ],
       },
-      {
-        text: 'Key Events Tracked',
-        sub: [
-          'File uploads, extraction triggers, conversion completions',
-          'Gallery page views, navigation clicks, device/geo context',
-        ],
-      },
     ],
+    code: {
+      language: 'jsx',
+      snippet: `// Statsig HOC wrapping a widget component
+const TdeWidgetWithStats = withStatsigProvider(
+  TdeWidget,
+  { role: "widget_user", source: "iframe_widget" }
+);
+
+// Logging a custom event inside the widget
+const { logEvent } = useStatsigHook();
+logEvent("tde_widget_extract", fileId, {
+  fileName: file.name,
+  fileSize: file.size,
+});`,
+    },
   },
+  {
+    id: 181,
+    section: 'capstone',
+    title: 'Analytics Architecture — Diagram',
+    subtitle: 'Event Tracking Across Both Surfaces',
+    image: '/images/statsig-architecture.png',
+  },
+  // ── Implementation slides with screenshots ──
   {
     id: 19,
     section: 'capstone',
@@ -358,6 +438,7 @@ const slides: SlideData[] = [
       url: 'https://nexus.factorem.co/demo/technical-drawing',
     },
     note: 'Events: tde_widget_file_upload · tde_widget_extract',
+    image: '/images/tde-widget.png',
   },
   {
     id: 20,
@@ -374,6 +455,7 @@ const slides: SlideData[] = [
       url: 'https://nexus.factorem.co/demo/3d-design-file',
     },
     note: 'Events: dfm_widget_file_upload · dfm_widget_extract',
+    image: '/images/dfm-widget.png',
   },
   {
     id: 21,
@@ -391,22 +473,38 @@ const slides: SlideData[] = [
       'Event: conversion_widget_file_upload with value distinguishing flow type',
     ],
     note: 'SLDPRT-to-STEP dominated usage despite not being the default tab — a key insight',
+    image: '/images/cad-conversion.png',
   },
+  // ── Parts Gallery: split into public + admin ──
   {
     id: 22,
     section: 'capstone',
     title: 'Implementation — Parts Gallery',
+    subtitle: 'Public Showcase',
     bullets: [
       'Public showcase of real completed-part images from operational workflow',
       'Category browsing with progressive loading',
-      'Admin management interface: refresh, search, add, remove, blacklist, batch publish, image replacement',
       'Curated JSON + S3 image assets consumed by Webflow component',
     ],
     demoLink: {
       label: '🔗 Live — Parts Gallery on factorem.co',
       url: 'https://factorem.co/capabilities',
     },
+    image: '/images/parts-gallery.png',
   },
+  {
+    id: 221,
+    section: 'capstone',
+    title: 'Parts Gallery — Admin Management',
+    subtitle: 'Curation & Publication Interface',
+    bullets: [
+      'Refresh, search, add, remove, blacklist, batch publish, image replacement',
+      'Admin-only routes behind authentication gates',
+      'Publication controls ensure only approved items reach the public',
+    ],
+    image: '/images/gallery-admin.png',
+  },
+  // ── Testing ──
   {
     id: 23,
     section: 'capstone',
@@ -434,7 +532,9 @@ const slides: SlideData[] = [
       'iPhone XR · Galaxy Z Fold 5 · iPad Air',
       'Webflow staging environment tested',
     ],
+    image: '/images/cypress-summary.png',
   },
+  // ── Security ──
   {
     id: 24,
     section: 'capstone',
@@ -447,6 +547,7 @@ const slides: SlideData[] = [
       'Statsig QA account exclusion to maintain data integrity',
     ],
   },
+  // ── Results: split into text + charts ──
   {
     id: 25,
     section: 'capstone',
@@ -477,6 +578,23 @@ const slides: SlideData[] = [
     ],
   },
   {
+    id: 251,
+    section: 'capstone',
+    title: 'Analytics Evidence',
+    subtitle: 'Data from Statsig — Jan to Mar 2026',
+    images: ['/images/conversion-events.png', '/images/nav-donut.png'],
+    note: 'Left: SLDPRT-to-STEP dominated conversion events · Right: 69% direct nav clicks vs 31% dropdown',
+  },
+  {
+    id: 252,
+    section: 'capstone',
+    title: 'Gallery Impact & Reach',
+    subtitle: 'Page views, quote clicks & geographic distribution',
+    images: ['/images/quote-clicks.png', '/images/geo-distribution.png'],
+    note: 'Left: "Get Quote Now" spike coincides with gallery launch · Right: US (207) and SG (153) lead traffic',
+  },
+  // ── Challenges ──
+  {
     id: 26,
     section: 'capstone',
     title: 'Challenges & Trade-offs',
@@ -499,6 +617,7 @@ const slides: SlideData[] = [
       },
     ],
   },
+  // ── Knowledge & Learning ──
   {
     id: 27,
     section: 'capstone',

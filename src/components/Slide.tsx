@@ -131,6 +131,18 @@ export default function Slide({ slide, index, total }: SlideProps) {
             )}
           </div>
         </div>
+        {slide.image && (
+          <div className="slide__image">
+            <img src={slide.image} alt={slide.title} />
+          </div>
+        )}
+        {slide.images && (
+          <div className={`slide__images slide__images--${slide.images.length}`}>
+            {slide.images.map((src, i) => (
+              <img key={i} src={src} alt={`${slide.title} ${i + 1}`} />
+            ))}
+          </div>
+        )}
         {slide.note && <p className="slide__note">{slide.note}</p>}
         <div className="slide__counter">
           {index + 1} / {total}
@@ -169,6 +181,24 @@ export default function Slide({ slide, index, total }: SlideProps) {
         >
           {slide.demoLink.label}
         </a>
+      )}
+      {slide.code && (
+        <div className="slide__code">
+          <div className="slide__code-header">{slide.code.language}</div>
+          <pre><code>{slide.code.snippet}</code></pre>
+        </div>
+      )}
+      {slide.image && (
+        <div className={`slide__image${!slide.bullets ? ' slide__image--full' : ''}`}>
+          <img src={slide.image} alt={slide.title} />
+        </div>
+      )}
+      {slide.images && (
+        <div className={`slide__images slide__images--${slide.images.length}`}>
+          {slide.images.map((src, i) => (
+            <img key={i} src={src} alt={`${slide.title} ${i + 1}`} />
+          ))}
+        </div>
       )}
       {slide.note && <p className="slide__note">{slide.note}</p>}
       <div className="slide__counter">
